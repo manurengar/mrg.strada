@@ -1,0 +1,17 @@
+{
+  "generator-ui5-ts-app": {
+    "namespace": "mrg.strada",
+    "framework": "SAPUI5",
+    "frameworkVersion": "1.140.0",
+    "author": "manurengar",
+    "initrepo": true,
+    "tstypes": "@sapui5/types",
+    "tstypesVersion": "1.140.0",
+    "appId": "mrg.strada",
+    "appURI": "mrg/strada",
+    "cdnDomain": "ui5.sap.com",
+    "defaultTheme": "sap_horizon",
+    "gte11150": true,
+    "setupCompleted": true
+  }
+}
