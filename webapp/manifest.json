@@ -1,6 +1,5 @@
 {
 	"_version": "1.12.0",
-
 	"sap.app": {
 		"id": "mrg.strada",
 		"type": "application",
@@ -9,9 +8,17 @@
 		"description": "{{appDescription}}",
 		"applicationVersion": {
 			"version": "1.0.0"
+		},
+		"dataSources": {
+			"northwind": {
+				"type": "OData",
+				"uri": "V2/Northwind/Northwind.svc",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
 		}
 	},
-
 	"sap.ui": {
 		"technology": "UI5",
 		"icons": {},
@@ -21,7 +28,6 @@
 			"phone": true
 		}
 	},
-
 	"sap.ui5": {
 		"rootView": {
 			"viewName": "mrg.strada.view.App",
@@ -29,7 +35,6 @@
 			"async": true,
 			"id": "app"
 		},
-
 		"dependencies": {
 			"minUI5Version": "1.140.0",
 			"libs": {
@@ -37,26 +42,28 @@
 				"sap.m": {}
 			}
 		},
-
 		"handleValidation": true,
-
 		"contentDensities": {
 			"compact": true,
 			"cozy": true
 		},
-
 		"models": {
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
 					"bundleName": "mrg.strada.i18n.i18n"
 				}
+			},
+			"Northwind": {
+				"dataSource": "northwind"
 			}
 		},
-
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
+				"bypassed": {
+					"target": "NotFound"
+				},
 				"viewType": "XML",
 				"viewPath": "mrg.strada.view",
 				"controlId": "app",
@@ -65,15 +72,48 @@
 			},
 			"routes": [
 				{
-					"pattern": "",
-					"name": "main",
-					"target": "main"
+					"name": "RouteMain",
+					"pattern": ":?query:",
+					"target": [
+						"TargetMain"
+					]
+				},
+				{
+					"name": "Detail",
+					"pattern": "detailView/{path}",
+					"target": [
+						"Detail"
+					]
+				},
+				{
+					"name": "NotFound",
+					"pattern": "notFound",
+					"target": [
+						"NotFound"
+					]
 				}
 			],
 			"targets": {
-				"main": {
+				"TargetMain": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
 					"viewId": "main",
 					"viewName": "Main"
+				},
+				"Detail": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "detail",
+					"viewName": "Details"
+				},
+				"NotFound": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "notfound",
+					"viewName": "NotFound"
 				}
 			}
 		}
